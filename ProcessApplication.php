@@ -27,6 +27,20 @@ require_once 'functions/User.php';
 
 if (!empty($_POST)) {
 
+	$error = false;
+
+	foreach ($_POST as $key => $value) {
+		if (mb_strlen($value) > 1000) {
+			$error = true;
+			break;
+		}
+	}
+
+	if ($error) {
+		echo '<script>alert("Παρακαλώ συμπληρώστε ξανά με νέες τιμές!");</script>';
+		exit;
+	}
+
 	$user = new User();
 	$username = $_SESSION['username'];
 	$user->setUser($username);
@@ -95,18 +109,18 @@ if (!empty($_POST)) {
 
 		}
 
-		$sql = "INSERT INTO form_t VALUES ('','" .$appId. "','" .$apa. 
+		$sql = "INSERT INTO form_t VALUES ('','" .$appId. "','" .$apa.
 		"', '" . $yphresia_imerominia . "', '" . $yphresia_ar_protok. "', '
 		" . $yphresia_perivantollogiki_tautotita . "', '" . $xrhsths_tax_dieuthinsi . "','
-		" .$xrhsths_tilefwno. "','" . $xrhsths_fax . "', '" . $xrhsths_email ."','" .$xrhsths_titlos_ergou . "','" 
-		. $foreas_epwnumia. "','" . $foreas_dieuthinsi. "','" . $foreas_perioxi ."','" . $foreas_tilefwno ."','" . 
+		" .$xrhsths_tilefwno. "','" . $xrhsths_fax . "', '" . $xrhsths_email ."','" .$xrhsths_titlos_ergou . "','"
+		. $foreas_epwnumia. "','" . $foreas_dieuthinsi. "','" . $foreas_perioxi ."','" . $foreas_tilefwno ."','" .
 		$foreas_fax . "','" . $foreas_email . "','" . $foreas_ypeuthinos_epikoinwnias . "','" . $foreas_ypeuthinos_tilefwno . "','" .
 		$foreas_ypeuthinos_email . "','" . $foreas_ypeuthinos_thesi . "','" . $meletitis_epwnumia . "','" . $meletitis_dieuthinsi . "','" .
 		$meletitis_perioxi . "','" . $meletitis_tilefwno . "','" . $meletitis_fax . "','" . $meletitis_email . "','" . $meletitis_ypeuthinos_epikoinwnias . "','" .
 		$meletitis_ypeuthinos_tilefwno . "','" . $meletitis_ypeuthinos_email . "','" . $meletitis_ypeuthinos_thesi . "','" .
 		$category_id. "','" . $type_id . "','" . $aa . "','" . $egsa87_1 . "','" . $egsa87_2 . "','" .$egsa87_3. "','" .
 		$wgs84_1. "','" . $wgs84_2 ."','" . $wgs84_3 . "','" . $perifereia_id . "','" . $perifereiaki_enotita_id . "','" . $dimos . "')";
-	
+
 		$result3 = $db->query($sql);
 
 		if ($result3) {
