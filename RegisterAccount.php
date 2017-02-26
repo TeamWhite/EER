@@ -38,9 +38,9 @@
 		$default_role = 1;
 
 		if ($password2 == $password1) {
-			$sql = "INSERT INTO accounts VALUES ('','" . $default_role . "','" . $username . 
-			"','" . sha1($password1) . "','" . $email . "','" . $name . "','" .$surname. "','" .$idNumber ."','" . $telephone. "','" . $datetime . "');";
-			
+			$sql = "INSERT INTO accounts VALUES ('','" . $default_role . "','" . $username .
+			"','" . hash('sha256',$password1) . "','" . $email . "','" . $name . "','" .$surname. "','" .$idNumber ."','" . $telephone. "','" . $datetime . "');";
+
 			if ($result = $db->query($sql)) {
 				echo '<script>alert("O Λογαριασμός σας δημιουργήθηκε επιτυχώς, παρακαλώ εισέλθετε!");</script>';
 				echo '<script>redirect("Login.php",1);</script>';

@@ -5,7 +5,7 @@ require_once 'config.php';
 class User {
 
 	private $id,$username,$password,$role,$email,$name,$surname,$id_number,$telephone,$creation_date;
-	
+
 	public function __construct() {
 	}
 
@@ -15,7 +15,7 @@ class User {
 		/* Sanitize user input */
 		$password = $db->real_escape_string($password);
 
-		$password = sha1($password);
+		$password = hash('sha256', $password);
 		$sql = "SELECT * FROM accounts WHERE `username`='$username' AND `password`='$password'";
 
 		if(!$result = $db->query($sql)){
@@ -99,7 +99,7 @@ class User {
 	}
 
 	public function getUserMenu() {
-		echo '<div class="user-bar"><a href="NewApplication.php"><strong>Νέα Αίτηση</strong></a> | 
+		echo '<div class="user-bar"><a href="NewApplication.php"><strong>Νέα Αίτηση</strong></a> |
     <a href="UserData.php">Ο Λογαριασμός μου</a> | <a href="MyApplications.php">Οι αιτήσεις μου</a> | <a href="Logout.php">Έξοδος</a></div>';
 	}
 
